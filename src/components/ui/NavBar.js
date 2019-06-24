@@ -1,4 +1,6 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+
 /**
 |--------------------------------------------------
 | Componente UI NavBar - Barra de navegação do site
@@ -17,13 +19,10 @@ const NavBar = (props) => {
                 </button>
                 <div className="collapse navbar-collapse" id="collapsibleNavId">
                     <ul className="navbar-nav mr-auto mt-2 mt-lg-0">
-                        <li className="nav-item active">
-                            <a className="nav-link" href="#">Home <span className="sr-only">(current)</span></a>
-                        </li>
-                        {props.itensMenu.map((item) => {
+                        {props._itensMenu.map((item) => {
                             return (
                                 <li className="nav-item">
-                                    <a className="nav-link" href="#">{item}</a>
+                                    <Link className="nav-link" to={item.Rota}>{item.Nome}</Link>
                                 </li>
 
                             );

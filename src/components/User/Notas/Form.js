@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import Form from '../../components/ui/Form';
+import Form from '../../ui/Form';
 
-class NotasForm extends Component {
+class ComponetUserNotasForm extends Component {
     formItens = [
         { label: 'Titulo', tipo: 'text', placeholder: 'Titulo do Livro' },
         { label: 'Nota', tipo: 'number', placeholder: 'atribua uma nota' },
@@ -15,4 +15,4 @@ class NotasForm extends Component {
     }
 }
 
-export default NotasForm;
+export default ComponetUserNotasForm;

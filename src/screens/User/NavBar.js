@@ -7,10 +7,12 @@ import React, { Component } from 'react';
 |--------------------------------------------------
 */
 export default class UserNavBar extends Component {
-    itens = ['Notas']
+    itensMenu = [
+        { Nome: 'Notas', Rota: '/UserNotas' }
+    ]
     render() {
         return (
-            <NavBar itensMenu={this.itens} />
+            <NavBar _itensMenu={this.itensMenu} />
         );
     }
 }

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import List from '../../components/ui/List';
+import List from '../../ui/List';
 
-class LivrosList extends Component {
+class ComponetAdmUserLivrosList extends Component {
     listCampos = ['Titulo', 'Autor', 'Editora']
     render() {
         return (
@@ -12,4 +12,4 @@ class LivrosList extends Component {
     }
 }
 
-export default LivrosList;
+export default ComponetAdmUserLivrosList;

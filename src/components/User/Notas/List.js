@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import List from '../../components/ui/List';
+import List from '../../ui/List';
 
-class NotasList extends Component {
+class ComponetUserNotasList extends Component {
     listCampos = ['Titulo do Livro', 'Autor', 'Nota']
     render() {
         return (
@@ -12,4 +12,4 @@ class NotasList extends Component {
     }
 }
 
-export default NotasList;
+export default ComponetUserNotasList;
