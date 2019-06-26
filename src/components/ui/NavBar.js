@@ -30,7 +30,8 @@ const NavBar = (props) => {
                         )}
                     </ul>
                     <form class="form-inline my-2 my-lg-0">
-                        <button class="btn btn-danger my-2 my-sm-0 btn-sm" onClick={() => localStorage.removeItem('token')} type="submit">Logout</button>
+                        <label className="text-light mr-3">{props._usuario}</label>
+                        <button className="btn btn-danger my-2 my-sm-0 btn-sm" onClick={() => localStorage.removeItem('token')} type="submit">Logout</button>
                     </form>
                 </div>
             </nav>

@@ -9,6 +9,7 @@ import ScreenAdmUserLivros from './screens/AdmUser/Livros';
 import ScreenAdmUserHome from './screens/AdmUser/Home';
 import Login from './components/ui/Login';
 import { isAuthenticated } from './auth';
+import Register from './components/ui/Register';
 
 const PrivateRoute = ({ component: Component, ...rest }) => (
     <Route {...rest} render={props => (
@@ -23,13 +24,18 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
 
 const Routes = () => (
     <BrowserRouter>
-        <Switch>
-            <Route path="/login" exact component={Login} />
-            <div className="container">
-                <PrivateRoute path="/" component={AdmUserNavBar} />
+        <Route path="/login" exact component={Login} />
+        <Route path="/register" exact component={Register} />
 
-            </div>
-        </Switch>
+        <div className="container">
+            <PrivateRoute exact path="/" component={AdmUserNavBar} />
+            <Switch>
+                <PrivateRoute path="/livros" component={ScreenAdmUserLivros} />
+                <PrivateRoute path="/notas" component={ScreenAdmUserNotas} />
+                <PrivateRoute path="/admuser" component={ScreenAdmUserHome} />
+
+            </Switch>
+        </div>
     </BrowserRouter>
 );
 

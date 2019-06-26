@@ -8,13 +8,13 @@ import React, { Component } from 'react';
 */
 export default class AdmUserNavBar extends Component {
     itensMenu = [
-        { Nome: 'Home', Rota: '/' },
-        { Nome: 'Livros', Rota: '/AdmUserLivros' },
-        { Nome: 'Notas', Rota: '/AdmUserNotas' }
+        { Nome: 'Home', Rota: '/admuser' },
+        { Nome: 'Livros', Rota: '/livros' },
+        { Nome: 'Notas', Rota: '/notas' }
     ]
     render() {
         return (
-            <NavBar _itensMenu={this.itensMenu} />
+            <NavBar _itensMenu={this.itensMenu} _usuario={localStorage.getItem('usuario')} />
         );
     }
 }

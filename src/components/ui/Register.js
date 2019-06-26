@@ -1,3 +1,4 @@
+
 import React, { Component } from 'react';
 import { Form, FormGroup, Label, Input, Button, Alert } from 'reactstrap'
 import Header from '../Header';
@@ -7,7 +8,7 @@ import { Link } from 'react-router-dom';
 | Tela de Login do Site
 |--------------------------------------------------
 */
-export default class Login extends Component {
+export default class Register extends Component {
     constructor() {
         super();
         this.state = {
@@ -17,8 +18,14 @@ export default class Login extends Component {
     }
 
 
-    signIn = () => {
-        const data = { email: this.email, senha: this.senha };
+    create = () => {
+        const data = {
+            nome: this.nome,
+            email: this.email,
+            senha: this.senha,
+            administrador: this.administrador == 'on' ? true : false,
+        };
+        console.log(data);
         const requestInfo = {
             method: 'POST',
             body: JSON.stringify(data),
@@ -27,17 +34,13 @@ export default class Login extends Component {
             }),
         };
 
-        fetch('http://localhost:4000/auth/authenticate', requestInfo)
+        fetch('http://localhost:4000/auth/register', requestInfo)
             .then(response => {
                 if (response.ok) {
-                    console.log(response);
+                    console.log(response.data)
                     return response.json()
                 }
                 throw new Error("Login invalido");
-            })
-            .then(data => {
-                console.log(data.user.nome);
-                localStorage.setItem('usuario', data.user.nome);
             })
             .then(token => {
                 localStorage.setItem('token', token);
@@ -46,8 +49,6 @@ export default class Login extends Component {
             .catch(e => {
                 this.setState({ message: e.message })
             });
-        console.log(localStorage.getItem('usuario'));
-
     };
 
     render() {
@@ -62,6 +63,10 @@ export default class Login extends Component {
                 }
                 <Form>
                     <FormGroup>
+                        <Label for="nome">nome</Label>
+                        <Input type="text" id="nome" onChange={e => this.nome = e.target.value} placeholder="Informe seu nome"></Input>
+                    </FormGroup>
+                    <FormGroup>
                         <Label for="email">Email</Label>
                         <Input type="text" id="email" onChange={e => this.email = e.target.value} placeholder="Informe seu e-mail"></Input>
                     </FormGroup>
@@ -69,9 +74,13 @@ export default class Login extends Component {
                         <Label for="senha">Senha</Label>
                         <Input type="password" id="senha" onChange={e => this.senha = e.target.value} placeholder="Informe sua senha"></Input>
                     </FormGroup>
-                    <Button color="primary" block onClick={this.signIn}>Entrar</Button>
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="customCheck1" onChange={e => this.administrador = e.target.value} />
+                        <label class="custom-control-label" for="customCheck1">Administrador</label>
+                    </div>
+                    <Button color="primary" block onClick={this.create}>Salvar</Button>
                 </Form>
-                <Link className="text-danger" to="/register">Eu não tenho usuário</Link>
+                <Link className="text-danger">Eu não tenho usuário</Link>
             </div>
         );
     }
