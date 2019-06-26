@@ -8,7 +8,8 @@ import React, { Component } from 'react';
 */
 export default class UserNavBar extends Component {
     itensMenu = [
-        { Nome: 'Notas', Rota: '/UserNotas' }
+        { Nome: 'Home', Rota: '/user/home' },
+        { Nome: 'Notas', Rota: '/user/notas' }
     ]
     render() {
         return (

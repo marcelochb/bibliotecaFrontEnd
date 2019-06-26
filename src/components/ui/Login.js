@@ -11,7 +11,7 @@ export default class Login extends Component {
     constructor() {
         super();
         this.state = {
-            message: ''
+            message: '',
         };
 
     }
@@ -30,24 +30,21 @@ export default class Login extends Component {
         fetch('http://localhost:4000/auth/authenticate', requestInfo)
             .then(response => {
                 if (response.ok) {
-                    console.log(response);
                     return response.json()
                 }
                 throw new Error("Login invalido");
             })
             .then(data => {
-                console.log(data.user.nome);
-                localStorage.setItem('usuario', data.user.nome);
-            })
-            .then(token => {
-                localStorage.setItem('token', token);
-                this.props.history.push("/");
+                console.log(data.token);
+                localStorage.setItem('nome', data.user.nome);
+                localStorage.setItem('administrador', data.user.administrador);
+                localStorage.setItem('token', data.token);
+                console.log(localStorage.getItem('token'));
+                this.props.history.push("/home");
             })
             .catch(e => {
                 this.setState({ message: e.message })
             });
-        console.log(localStorage.getItem('usuario'));
-
     };
 
     render() {

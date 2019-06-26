@@ -7,14 +7,20 @@ import React, { Component } from 'react';
 |--------------------------------------------------
 */
 export default class AdmUserNavBar extends Component {
-    itensMenu = [
-        { Nome: 'Home', Rota: '/admuser' },
-        { Nome: 'Livros', Rota: '/livros' },
-        { Nome: 'Notas', Rota: '/notas' }
+    itensMenuAdm = [
+        { Nome: 'Home', Rota: '/home/texto' },
+        { Nome: 'Livros', Rota: '/home/livros' },
+        { Nome: 'Notas', Rota: '/home/notas' }
     ]
+    itensMenuUser = [
+        { Nome: 'Home', Rota: '/home/user' },
+        { Nome: 'Notas', Rota: '/home/nota' }
+    ]
+
     render() {
+        { console.log(localStorage.getItem('token')) }
         return (
-            <NavBar _itensMenu={this.itensMenu} _usuario={localStorage.getItem('usuario')} />
+            <NavBar _itensMenu={localStorage.getItem('administrador') == "true" ? this.itensMenuAdm : this.itensMenuUser} />
         );
     }
 }

@@ -23,7 +23,7 @@ export default class Register extends Component {
             nome: this.nome,
             email: this.email,
             senha: this.senha,
-            administrador: this.administrador == 'on' ? true : false,
+            administrador: this.administrador === 'on' ? true : false,
         };
         console.log(data);
         const requestInfo = {
@@ -42,9 +42,13 @@ export default class Register extends Component {
                 }
                 throw new Error("Login invalido");
             })
+            .then(result => {
+                localStorage.setItem('nome', result.user.nome);
+                localStorage.setItem('administrador', result.user.administrador);
+            })
             .then(token => {
                 localStorage.setItem('token', token);
-                this.props.history.push("/");
+                this.props.history.push("/home");
             })
             .catch(e => {
                 this.setState({ message: e.message })
