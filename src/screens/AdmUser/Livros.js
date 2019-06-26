@@ -7,7 +7,6 @@ class ScreenAdmUserLivros extends Component {
         return (
             <div>
                 <ComponetAdmUserLivrosForm />
-                <ComponetAdmUserLivrosList />
             </div>
         );
     }

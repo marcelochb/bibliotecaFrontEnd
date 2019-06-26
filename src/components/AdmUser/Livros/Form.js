@@ -8,43 +8,130 @@ class ComponetAdmUserLivrosForm extends Component {
         this.state = {
             titulo: '',
             autor: '',
-            editora: ''
+            editora: '',
+            errorMessage: '',
+            result: []
         }
 
 
         this.handleSubmit = this.handleSubmit.bind(this);
-        this.handleTextChange = this.handleSubmit.bind(this);
     }
 
-    handleTextChange(e) {
+    componentDidMount = () => {
+        this.fetchData()
+    };
 
-    }
+
+    fetchData = () => {
+        const requestInfo = {
+            method: 'GET',
+            headers: new Headers({
+                Authorization: `Bearer ${localStorage.getItem('token')}`
+            }),
+        };
+
+        fetch('http://localhost:4000/projects/livros', requestInfo)
+            .then(res => { return res.json() })
+            .then(result => { return result })
+            .then(livro => {
+                this.setState({
+                    result: livro.livro
+                })
+            });
+
+    };
+
+
+
+
+
+
+
+    createLivro = () => {
+        const data = { titulo: this.titulo, autor: this.autor, editora: this.editora };
+        console.log(data);
+        const requestInfo = {
+            method: 'POST',
+            body: JSON.stringify(data),
+            headers: new Headers({
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${localStorage.getItem('token')}`
+            }),
+        };
+        console.log(requestInfo);
+
+        fetch('http://localhost:4000/projects/livros', requestInfo)
+            .then(response => { return response.json() })
+            .then(result => {
+                this.setState({ errorMessage: result.Error });
+                this.fetchData();
+            })
+            .catch(e => {
+                this.setState({ errorMessage: e.message })
+            });
+    };
 
 
     handleSubmit(e) {
         e.preventDefault();
-
     }
+
+
+
+
     render() {
         return (
             <div>
+                {
+                    this.state.errorMessage !== '' ? (
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <strong>{this.state.errorMessage}</strong>
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>) : ''
+                }
                 <form onSubmit={this.handleSubmit}>
                     <div className="form-row align-items-center">
                         <div className="col-auto">
-                            <input type="text" value={this.state.titulo} onChange={e => this.titulo = e.target.value} className="form-control mb-2" id="inlineFormInput" placeholder="Titulo do Livro" />
+                            <input type="text" onChange={e => this.titulo = e.target.value} className="form-control mb-2" id="titulo" placeholder="Titulo do Livro" />
                         </div>
                         <div className="col-auto">
-                            <input type="text" onChange={e => this.autor = e.target.value} className="form-control mb-2" id="inlineFormInput" placeholder="Autor do Livro" />
+                            <input type="text" onChange={e => this.autor = e.target.value} className="form-control mb-2" id="autor" placeholder="Autor do Livro" />
                         </div>
                         <div className="col-auto">
-                            <input type="text" onChange={e => this.editora = e.target.value} className="form-control mb-2" id="inlineFormInput" placeholder="Editora do Livro" />
+                            <input type="text" onChange={e => this.editora = e.target.value} className="form-control mb-2" id="editora" placeholder="Editora do Livro" />
                         </div>
                         <div className="col-auto">
-                            <button type="submit" className="btn btn-primary mb-2">Salvar</button>
+                            <button type="submit" className="btn btn-primary mb-2" onClick={this.createLivro}>Salvar</button>
                         </div>
                     </div>
                 </form>
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col">Titulo</th>
+                            <th scope="col">Autor</th>
+                            <th scope="col">Editora</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {
+                            this.state.result.map((item) => {
+                                return (
+                                    <tr>
+                                        <td>{item.titulo}</td>
+                                        <td>{item.autor}</td>
+                                        <td>{item.editora}</td>
+                                    </tr>
+                                );
+                            })
+                        }
+                    </tbody>
+                </table>
             </div>
+
+
         );
     }
 }
