@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { throwStatement } from '@babel/types';
 
 
 class ComponetAdmUserLivrosForm extends Component {
@@ -43,13 +44,33 @@ class ComponetAdmUserLivrosForm extends Component {
 
 
 
+    deletaLivro = (id) => {
+        const requestInfo = {
+            method: 'delete',
+            headers: new Headers({
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${localStorage.getItem('token')}`
+            }),
+        };
+        console.log(requestInfo);
 
+        fetch('http://localhost:4000/projects/livros/' + id, requestInfo)
+            .then(response => { return response.json() })
+            .then(result => {
+                this.setState({ errorMessage: result.Error });
+                this.fetchData();
+            })
+            .catch(e => {
+                console.log(e);
+                //this.setState({ errorMessage: e.message })
+                this.fetchData();
+            });
+    }
 
 
 
     createLivro = () => {
         const data = { titulo: this.titulo, autor: this.autor, editora: this.editora };
-        console.log(data);
         const requestInfo = {
             method: 'POST',
             body: JSON.stringify(data),
@@ -58,7 +79,6 @@ class ComponetAdmUserLivrosForm extends Component {
                 Authorization: `Bearer ${localStorage.getItem('token')}`
             }),
         };
-        console.log(requestInfo);
 
         fetch('http://localhost:4000/projects/livros', requestInfo)
             .then(response => { return response.json() })
@@ -69,6 +89,7 @@ class ComponetAdmUserLivrosForm extends Component {
             .catch(e => {
                 this.setState({ errorMessage: e.message })
             });
+        this.limpaCampos();
     };
 
 
@@ -76,14 +97,25 @@ class ComponetAdmUserLivrosForm extends Component {
         e.preventDefault();
     }
 
+    limpaCampos() {
+        document.getElementById('titulo').value = '';
+        document.getElementById('autor').value = '';
+        document.getElementById('editora').value = '';
+        this.setState({
+            titulo: '',
+            autor: '',
+            editora: '',
 
+        })
+
+    }
 
 
     render() {
         return (
             <div>
                 {
-                    this.state.errorMessage !== '' ? (
+                    this.state.errorMessage ? (
                         <div class="alert alert-danger alert-dismissible fade show" role="alert">
                             <strong>{this.state.errorMessage}</strong>
                             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -106,29 +138,35 @@ class ComponetAdmUserLivrosForm extends Component {
                             <button type="submit" className="btn btn-primary mb-2" onClick={this.createLivro}>Salvar</button>
                         </div>
                     </div>
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th scope="col">Titulo</th>
+                                <th scope="col">Autor</th>
+                                <th scope="col">Editora</th>
+                                <th scope="col">Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {
+                                this.state.result.map((item) => {
+                                    return (
+                                        <tr key={item._id}>
+                                            <td>{item.titulo}</td>
+                                            <td>{item.autor}</td>
+                                            <td>{item.editora}</td>
+                                            <td>
+                                                <button type="submit" className="btn btn-danger" onClick={() => this.deletaLivro(item._id)}>
+                                                    Delete
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    );
+                                })
+                            }
+                        </tbody>
+                    </table>
                 </form>
-                <table class="table table-hover">
-                    <thead>
-                        <tr>
-                            <th scope="col">Titulo</th>
-                            <th scope="col">Autor</th>
-                            <th scope="col">Editora</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {
-                            this.state.result.map((item) => {
-                                return (
-                                    <tr>
-                                        <td>{item.titulo}</td>
-                                        <td>{item.autor}</td>
-                                        <td>{item.editora}</td>
-                                    </tr>
-                                );
-                            })
-                        }
-                    </tbody>
-                </table>
             </div>
 
 

@@ -9,8 +9,6 @@ class ComponetAdmUserLivrosList extends Component {
             listData: []
         }
     }
-    listCabecalho = ['Titulo', 'Autor', 'Editora']
-    listCampos = ['titulo', 'autor', 'editora']
 
     componentDidMount = () => {
         this.fetchData()
