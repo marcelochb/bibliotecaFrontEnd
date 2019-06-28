@@ -18,9 +18,8 @@ export default class AdmUserNavBar extends Component {
     ]
 
     render() {
-        { console.log(localStorage.getItem('token')) }
         return (
-            <NavBar _itensMenu={localStorage.getItem('administrador') == "true" ? this.itensMenuAdm : this.itensMenuUser} />
+            <NavBar _itensMenu={localStorage.getItem('administrador') === "true" ? this.itensMenuAdm : this.itensMenuUser} />
         );
     }
 }

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import List from '../../ui/List';
 
 class ComponetAdmUserLivrosList extends Component {
     constructor(props) {

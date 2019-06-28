@@ -7,12 +7,3 @@ export const isAuthenticated = () => {
     }
     return false;
 };
-
-export const isAdministrator = () => {
-    console.log(localStorage.getItem('administrador'));
-    if (localStorage.getItem('administrador') == "true") {
-        console.log("entrou");
-        return true
-    }
-    return false;
-};
