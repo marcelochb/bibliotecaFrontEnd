@@ -35,11 +35,9 @@ export default class Login extends Component {
                 throw new Error("Login invalido");
             })
             .then(data => {
-                console.log(data.token);
                 localStorage.setItem('nome', data.user.nome);
                 localStorage.setItem('administrador', data.user.administrador);
                 localStorage.setItem('token', data.token);
-                console.log(localStorage.getItem('token'));
                 this.props.history.push("/home");
             })
             .catch(e => {

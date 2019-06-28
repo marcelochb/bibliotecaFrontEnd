@@ -37,7 +37,6 @@ export default class Register extends Component {
         fetch('http://localhost:4000/auth/register', requestInfo)
             .then(response => {
                 if (response.ok) {
-                    console.log(response.data)
                     return response.json()
                 }
                 throw new Error("Login invalido");
