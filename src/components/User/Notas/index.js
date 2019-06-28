@@ -33,7 +33,11 @@ class ComponetUserNotas extends Component {
                 this.setState({
                     resultLivro: data.livros
                 })
-            });
+            })
+            .catch(result => {
+                this.setState({ errorMessage: result.Error })
+            })
+            ;
 
     };
 

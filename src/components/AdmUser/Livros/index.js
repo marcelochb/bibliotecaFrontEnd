@@ -31,9 +31,9 @@ class ComponetAdmUserLivros extends Component {
                     result: data.livro
                 })
             })
-            .catch(e => {
-                this.setState({ errorMessage: e.message })
-            });
+        // .catch(e => {
+        //     this.setState({ errorMessage: e.message })
+        // });
 
     };
 
