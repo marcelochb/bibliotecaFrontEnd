@@ -27,7 +27,6 @@ class ComponetAdmUserLivrosForm extends Component {
         api.get('projects/livros')
             .then(response => { return response.data })
             .then(data => {
-                console.log(data)
                 this.setState({
                     result: data.livro
                 })

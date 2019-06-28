@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import api from '../../../services/api';
 
 class ComponetUserNotasForm extends Component {
     constructor(props) {
@@ -26,39 +27,22 @@ class ComponetUserNotasForm extends Component {
 
 
     fetchDataLivro = () => {
-        const requestInfo = {
-            method: 'GET',
-            headers: new Headers({
-                Authorization: `Bearer ${localStorage.getItem('token')}`
-            }),
-        };
-
-        fetch(process.env.REACT_APP_API_URL + 'livrosnotas', requestInfo)
-            .then(res => { return res.json() })
-            .then(result => { return result })
-            .then(livros => {
+        api.get('projects/livrosnotas')
+            .then(response => { return response.data })
+            .then(data => {
                 this.setState({
-                    resultLivro: livros.livros
+                    resultLivro: data.livros
                 })
             });
 
     };
 
     fetchDataNota = () => {
-        const requestInfo = {
-            method: 'GET',
-            headers: new Headers({
-                Authorization: `Bearer ${localStorage.getItem('token')}`
-            }),
-        };
-
-        fetch(process.env.REACT_APP_API_URL + 'notas', requestInfo)
-            .then(res => { return res.json() })
-            .then(result => { return result })
-            .then(notas => {
-                console.log(notas)
+        api.get('projects/notas')
+            .then(response => { return response.data })
+            .then(data => {
                 this.setState({
-                    resultNota: notas.notas
+                    resultNota: data.notas
                 })
             });
 
@@ -66,19 +50,10 @@ class ComponetUserNotasForm extends Component {
 
 
     deletarNota = (id) => {
-        const requestInfo = {
-            method: 'delete',
-            headers: new Headers({
-                'Content-Type': 'application/json',
-                Authorization: `Bearer ${localStorage.getItem('token')}`
-            }),
-        };
-        console.log(requestInfo);
-
-        fetch(process.env.REACT_APP_API_URL + 'nota/' + id, requestInfo)
+        api.delete('projects/nota/' + id)
+            .then(result => this.setState({ errorMessage: result.Error }))
             .catch(e => {
-                //console.log(e);
-                //this.setState({ errorMessage: e.message })
+                this.setState({ errorMessage: e.message })
                 this.fetchDataLivro();
             });
     }
@@ -87,18 +62,7 @@ class ComponetUserNotasForm extends Component {
 
     salvarNota = () => {
         const data = { nota: this.nota, livroId: this.state.livroId };
-        console.log(data);
-        const requestInfo = {
-            method: 'POST',
-            body: JSON.stringify(data),
-            headers: new Headers({
-                'Content-Type': 'application/json',
-                Authorization: `Bearer ${localStorage.getItem('token')}`
-            }),
-        };
-
-        fetch(process.env.REACT_APP_API_URL + 'notas', requestInfo)
-            .then(response => { return response.json() })
+        api.post('projects/notas', data)
             .then(result => {
                 this.setState({ errorMessage: result.Error });
                 this.fetchDataLivro();
