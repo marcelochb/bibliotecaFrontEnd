@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import ComponetAdmUserLivrosForm from '../../components/AdmUser/Livros/Form';
+import ComponetAdmUserLivros from '../../components/AdmUser/Livros';
 
 class ScreenAdmUserLivros extends Component {
     render() {
         return (
             <div>
-                <ComponetAdmUserLivrosForm />
+                <ComponetAdmUserLivros />
             </div>
         );
     }

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import api from '../../../services/api'
 
 
-class ComponetAdmUserLivrosForm extends Component {
+class ComponetAdmUserLivros extends Component {
     constructor(props) {
         super(props);
 
@@ -65,7 +65,7 @@ class ComponetAdmUserLivrosForm extends Component {
 
     createLivro = () => {
         const data = { titulo: this.titulo, autor: this.autor, editora: this.editora };
-        api.post('livros', data)
+        api.post('projects/livros', data)
             .then(response => { return response.json() })
             .then(result => {
                 this.setState({ errorMessage: result.Error });
@@ -159,4 +159,4 @@ class ComponetAdmUserLivrosForm extends Component {
     }
 }
 
-export default ComponetAdmUserLivrosForm;
+export default ComponetAdmUserLivros;
