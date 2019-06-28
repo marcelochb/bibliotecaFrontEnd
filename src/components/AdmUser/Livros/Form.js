@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import api from '../../../services/api'
 
 
 class ComponetAdmUserLivrosForm extends Component {
@@ -30,7 +31,7 @@ class ComponetAdmUserLivrosForm extends Component {
             }),
         };
 
-        fetch(process.env.REACT_APP_API_URL + 'livros', requestInfo)
+        api.get('livros')
             .then(res => { return res.json() })
             .then(result => { return result })
             .then(livro => {
@@ -53,15 +54,14 @@ class ComponetAdmUserLivrosForm extends Component {
         };
         console.log(requestInfo);
 
-        fetch(process.env.REACT_APP_API_URL + 'livros/' + id, requestInfo)
-            .then(response => { return response.json() })
+        api.delete('livros/' + id)
+            .then(response => { return response })
             .then(result => {
                 this.setState({ errorMessage: result.Error });
                 this.fetchData();
             })
             .catch(e => {
-                console.log(e);
-                //this.setState({ errorMessage: e.message })
+                this.setState({ errorMessage: e.message })
                 this.fetchData();
             });
     }
@@ -79,7 +79,7 @@ class ComponetAdmUserLivrosForm extends Component {
             }),
         };
 
-        fetch(process.env.REACT_APP_API_URL + 'livros', requestInfo)
+        api.post('livros', data)
             .then(response => { return response.json() })
             .then(result => {
                 this.setState({ errorMessage: result.Error });

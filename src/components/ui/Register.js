@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { Form, FormGroup, Label, Input, Button, Alert } from 'reactstrap'
 import Header from '../Header';
 import { Link } from 'react-router-dom';
+import api from '../../services/api'
 /**
 |--------------------------------------------------
 | Tela de Login do Site
@@ -25,7 +26,6 @@ export default class Register extends Component {
             senha: this.senha,
             administrador: this.administrador === 'on' ? true : false,
         };
-        console.log(data);
         const requestInfo = {
             method: 'POST',
             body: JSON.stringify(data),
@@ -34,16 +34,11 @@ export default class Register extends Component {
             }),
         };
 
-        fetch(process.env.REACT_APP_API_URL + 'auth/register', requestInfo)
-            .then(response => {
-                if (response.ok) {
-                    return response.json()
-                }
-                throw new Error("Login invalido");
-            })
-            .then(result => {
-                localStorage.setItem('nome', result.user.nome);
-                localStorage.setItem('administrador', result.user.administrador);
+        api.post('auth/register', data)
+            .then(response => { return response.data })
+            .then(data => {
+                localStorage.setItem('nome', data.user.nome);
+                localStorage.setItem('administrador', data.user.administrador);
             })
             .then(token => {
                 localStorage.setItem('token', token);
