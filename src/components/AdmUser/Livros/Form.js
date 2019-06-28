@@ -24,20 +24,16 @@ class ComponetAdmUserLivrosForm extends Component {
 
 
     fetchData = () => {
-        const requestInfo = {
-            method: 'GET',
-            headers: new Headers({
-                Authorization: `Bearer ${localStorage.getItem('token')}`
-            }),
-        };
-
-        api.get('livros')
-            .then(res => { return res.json() })
-            .then(result => { return result })
-            .then(livro => {
+        api.get('projects/livros')
+            .then(response => { return response.data })
+            .then(data => {
+                console.log(data)
                 this.setState({
-                    result: livro.livro
+                    result: data.livro
                 })
+            })
+            .catch(e => {
+                this.setState({ errorMessage: e.message })
             });
 
     };
@@ -70,15 +66,6 @@ class ComponetAdmUserLivrosForm extends Component {
 
     createLivro = () => {
         const data = { titulo: this.titulo, autor: this.autor, editora: this.editora };
-        const requestInfo = {
-            method: 'POST',
-            body: JSON.stringify(data),
-            headers: new Headers({
-                'Content-Type': 'application/json',
-                Authorization: `Bearer ${localStorage.getItem('token')}`
-            }),
-        };
-
         api.post('livros', data)
             .then(response => { return response.json() })
             .then(result => {

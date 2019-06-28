@@ -26,14 +26,6 @@ export default class Register extends Component {
             senha: this.senha,
             administrador: this.administrador === 'on' ? true : false,
         };
-        const requestInfo = {
-            method: 'POST',
-            body: JSON.stringify(data),
-            headers: new Headers({
-                'Content-Type': 'application/json'
-            }),
-        };
-
         api.post('auth/register', data)
             .then(response => { return response.data })
             .then(data => {

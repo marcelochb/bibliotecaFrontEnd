@@ -20,15 +20,6 @@ export default class Login extends Component {
 
     signIn = () => {
         const data = { email: this.email, senha: this.senha };
-        const requestInfo = {
-            method: 'POST',
-            body: JSON.stringify(data),
-            headers: new Headers({
-                'Content-Type': 'application/json'
-            }),
-        };
-        console.log(process.env.REACT_APP_API_URL + 'auth/authenticate')
-
         api.post('auth/authenticate', data)
             .then(response => { return response.data })
             .then(data => {
