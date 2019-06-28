@@ -66,7 +66,6 @@ class ComponetAdmUserLivros extends Component {
     createLivro = () => {
         const data = { titulo: this.titulo, autor: this.autor, editora: this.editora };
         api.post('projects/livros', data)
-            .then(response => { return response.json() })
             .then(result => {
                 this.setState({ errorMessage: result.Error });
                 this.fetchData();
