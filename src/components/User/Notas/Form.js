@@ -33,7 +33,7 @@ class ComponetUserNotasForm extends Component {
             }),
         };
 
-        fetch('http://localhost:4000/projects/livrosnotas', requestInfo)
+        fetch(process.env.REACT_APP_API_URL + 'livrosnotas', requestInfo)
             .then(res => { return res.json() })
             .then(result => { return result })
             .then(livros => {
@@ -52,7 +52,7 @@ class ComponetUserNotasForm extends Component {
             }),
         };
 
-        fetch('http://localhost:4000/projects/notas', requestInfo)
+        fetch(process.env.REACT_APP_API_URL + 'notas', requestInfo)
             .then(res => { return res.json() })
             .then(result => { return result })
             .then(notas => {
@@ -75,7 +75,7 @@ class ComponetUserNotasForm extends Component {
         };
         console.log(requestInfo);
 
-        fetch('http://localhost:4000/projects/nota/' + id, requestInfo)
+        fetch(process.env.REACT_APP_API_URL + 'nota/' + id, requestInfo)
             .catch(e => {
                 //console.log(e);
                 //this.setState({ errorMessage: e.message })
@@ -97,7 +97,7 @@ class ComponetUserNotasForm extends Component {
             }),
         };
 
-        fetch('http://localhost:4000/projects/notas', requestInfo)
+        fetch(process.env.REACT_APP_API_URL + 'notas', requestInfo)
             .then(response => { return response.json() })
             .then(result => {
                 this.setState({ errorMessage: result.Error });

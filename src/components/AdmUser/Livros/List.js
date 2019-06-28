@@ -22,7 +22,7 @@ class ComponetAdmUserLivrosList extends Component {
             }),
         };
 
-        fetch('http://localhost:4000/projects/livros', requestInfo)
+        fetch(process.env.REACT_APP_API_URL + 'livros', requestInfo)
             .then(res => { return res.json() })
             .then(result => { return result })
             .then(livro => {

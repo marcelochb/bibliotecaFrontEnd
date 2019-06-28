@@ -23,7 +23,7 @@ class ComponentAdmUserNotasList extends Component {
             }),
         };
 
-        fetch('http://localhost:4000/projects/notas', requestInfo)
+        fetch(process.env.REACT_APP_API_URL + 'notas', requestInfo)
             .then(res => { return res.json() })
             .then(result => { return result })
             .then(notas => {

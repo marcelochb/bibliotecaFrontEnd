@@ -29,7 +29,7 @@ class ScreenAdmUserNotas extends Component {
             }),
         };
 
-        fetch('http://localhost:4000/projects/notasmedia', requestInfo)
+        fetch(process.env.REACT_APP_API_URL + 'notasmedia', requestInfo)
             .then(res => { return res.json() })
             .then(result => { return result })
             .then(notas => {
