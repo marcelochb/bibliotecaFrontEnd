@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import api from '../../../services/api';
 
-class ComponetUserNotasForm extends Component {
+class ComponetUserNotas extends Component {
     constructor(props) {
         super(props);
 
@@ -195,4 +195,4 @@ class ComponetUserNotasForm extends Component {
     }
 }
 
-export default ComponetUserNotasForm;
+export default ComponetUserNotas;

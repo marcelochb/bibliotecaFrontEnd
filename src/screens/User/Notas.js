@@ -1,5 +1,5 @@
 import React from 'react';
-import ComponetUserNotasForm from '../../components/User/Notas/Form';
+import ComponetUserNotasForm from '../../components/User/Notas';
 
 const ScreenUserNotas = () => {
     return (
