@@ -6,7 +6,7 @@ import ScreenAdmUserNotas from './screens/AdmUser/Notas';
 import ScreenAdmUserLivros from './screens/AdmUser/Livros';
 import ScreenAdmUserHome from './screens/AdmUser/Home';
 import Login from './components/ui/Login';
-import { isAuthenticated } from './auth';
+import { isAuthenticated } from './services/auth';
 import Register from './components/ui/Register';
 import ScreenUserHome from './screens/User/Home';
 

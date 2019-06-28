@@ -23,7 +23,6 @@ export default class Login extends Component {
         api.post('auth/authenticate', data)
             .then(response => { return response.data })
             .then(data => {
-                console.log(data)
                 localStorage.setItem('nome', data.user.nome);
                 localStorage.setItem('administrador', data.user.administrador);
                 localStorage.setItem('token', data.token);
