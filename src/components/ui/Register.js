@@ -34,7 +34,7 @@ export default class Register extends Component {
             }),
         };
 
-        fetch('http://localhost:4000/auth/register', requestInfo)
+        fetch(process.env.REACT_APP_API_URL + 'auth/register', requestInfo)
             .then(response => {
                 if (response.ok) {
                     return response.json()

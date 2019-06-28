@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Form, FormGroup, Label, Input, Button, Alert } from 'reactstrap'
 import Header from '../Header';
 import { Link } from 'react-router-dom';
+import api from '../../services/api'
 /**
 |--------------------------------------------------
 | Tela de Login do Site
@@ -26,19 +27,17 @@ export default class Login extends Component {
                 'Content-Type': 'application/json'
             }),
         };
+        console.log(process.env.REACT_APP_API_URL + 'auth/authenticate')
 
-        fetch('http://localhost:4000/auth/authenticate', requestInfo)
-            .then(response => {
-                if (response.ok) {
-                    return response.json()
-                }
-                throw new Error("Login invalido");
-            })
+        api.post('auth/authenticate', data)
+            .then(response => { return response.data })
             .then(data => {
+                console.log(data)
                 localStorage.setItem('nome', data.user.nome);
                 localStorage.setItem('administrador', data.user.administrador);
                 localStorage.setItem('token', data.token);
                 this.props.history.push("/home");
+
             })
             .catch(e => {
                 this.setState({ message: e.message })
