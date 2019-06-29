@@ -32,7 +32,6 @@ export default class Register extends Component {
             .then(data => {
                 localStorage.setItem('nome', data.user.nome);
                 localStorage.setItem('administrador', data.user.administrador);
-                console.log(data)
                 login(data.token);
                 this.props.history.push("/home");
             })
