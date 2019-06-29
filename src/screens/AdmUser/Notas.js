@@ -15,15 +15,6 @@ class ScreenAdmUserNotas extends Component {
     }
 
 
-    GetMedia = (id) => {
-        api.get('projects/notamedia' + id)
-            .then(Response => { return Response.data })
-
-    }
-
-
-
-
     componentDidMount = () => {
         this.fetchDataNota()
     };
