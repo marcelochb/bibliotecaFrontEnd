@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import api from '../../services/api'
 
 class ScreenAdmUserNotas extends Component {
     constructor(props) {
@@ -6,7 +7,10 @@ class ScreenAdmUserNotas extends Component {
 
         this.state = {
             errorMessage: '',
-            resultNota: [],
+            resultNotas: [],
+            resultLivros: [],
+            resultTudo: [],
+            media: []
         }
     }
 
@@ -22,20 +26,14 @@ class ScreenAdmUserNotas extends Component {
 
 
     fetchDataNota = () => {
-        const requestInfo = {
-            method: 'GET',
-            headers: new Headers({
-                Authorization: `Bearer ${localStorage.getItem('token')}`
-            }),
-        };
-
-        fetch(process.env.REACT_APP_API_URL + 'notasmedia', requestInfo)
-            .then(res => { return res.json() })
-            .then(result => { return result })
-            .then(notas => {
-                console.log(notas)
+        api.get('projects/notasmedia')
+            .then(Response => { return Response.data })
+            .then(result => {
+                console.log(result.result)
                 this.setState({
-                    resultNota: notas.notas
+                    resultNotas: result.result.notas,
+                    resultLivros: result.result.livros,
+                    resultTudo: result.result
                 })
             });
 
@@ -56,17 +54,40 @@ class ScreenAdmUserNotas extends Component {
                         </tr>
                     </thead>
                     <tbody>
-                        {/* {
-                                this.state.resultNota.map((item) => {
-                                    return (
-                                        <tr key={item._id}>
-                                            <td>{item.livro.titulo}</td>
-                                            <td>{item.livro.autor}</td>
-                                            <td>{item.nota}</td>
-                                        </tr>
-                                    );
-                                })
-                            } */}
+                        {
+                            this.state.resultLivros.map((itLivro) => {
+                                return (
+                                    <tr>
+                                        <td>{itLivro.titulo}</td>
+                                        <td>{itLivro.autor}</td>
+                                        <td>
+                                            {
+
+                                                // this.state.resultTudo.map((item) => {
+                                                //     return (item);
+                                                //     // return (
+                                                //     //     item.notas.filter(g => g.livro === itLivro._id).sum(x => x.nota)
+                                                //     // );
+
+                                                // })
+
+                                                // this.state.resultNotas.sum(x => {
+                                                //     return{}
+                                                // })
+
+
+
+                                                // this.state.resultNotas.map((itNota, i) => {
+                                                //     return (i++)
+                                                // })
+
+                                            }
+                                        </td>
+                                    </tr>
+
+                                );
+                            })
+                        }
                     </tbody>
                 </table>
             </div>

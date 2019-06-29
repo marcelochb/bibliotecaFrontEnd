@@ -3,6 +3,7 @@ import { Form, FormGroup, Label, Input, Button, Alert } from 'reactstrap'
 import Header from '../Header';
 import { Link } from 'react-router-dom';
 import api from '../../services/api'
+import { login } from '../../services/auth'
 /**
 |--------------------------------------------------
 | Tela de Login do Site
@@ -18,14 +19,14 @@ export default class Login extends Component {
     }
 
 
-    signIn = () => {
+    signIn = async () => {
         const data = { email: this.email, senha: this.senha };
         api.post('auth/authenticate', data)
             .then(response => { return response.data })
             .then(data => {
                 localStorage.setItem('nome', data.user.nome);
                 localStorage.setItem('administrador', data.user.administrador);
-                localStorage.setItem('token', data.token);
+                login(data.token);
                 this.props.history.push("/home");
 
             })

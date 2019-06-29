@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { logout } from '../../services/auth'
 
 /**
 |--------------------------------------------------
@@ -32,7 +33,7 @@ export default class NavBar extends Component {
                         </ul>
                         <form class="form-inline my-2 my-lg-0">
                             <label className="text-light mr-2">{localStorage.nome}</label>
-                            <button className="btn btn-danger my-2 my-sm-0 btn-sm" onClick={() => localStorage.removeItem('token')} type="submit">Logout</button>
+                            <button className="btn btn-danger my-2 my-sm-0 btn-sm" onClick={() => logout()} type="submit">Logout</button>
                         </form>
                     </div>
                 </nav>
