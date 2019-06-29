@@ -4,6 +4,7 @@ import { Form, FormGroup, Label, Input, Button, Alert } from 'reactstrap'
 import Header from '../Header';
 import { Link } from 'react-router-dom';
 import api from '../../services/api'
+import { login } from '../../services/auth'
 /**
 |--------------------------------------------------
 | Tela de Login do Site
@@ -31,9 +32,8 @@ export default class Register extends Component {
             .then(data => {
                 localStorage.setItem('nome', data.user.nome);
                 localStorage.setItem('administrador', data.user.administrador);
-            })
-            .then(token => {
-                localStorage.setItem('token', token);
+                console.log(data)
+                login(data.token);
                 this.props.history.push("/home");
             })
             .catch(e => {
