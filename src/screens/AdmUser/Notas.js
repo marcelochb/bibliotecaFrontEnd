@@ -15,7 +15,11 @@ class ScreenAdmUserNotas extends Component {
     }
 
 
+    GetMedia = (id) => {
+        api.get('projects/notamedia' + id)
+            .then(Response => { return Response.data })
 
+    }
 
 
 
@@ -62,6 +66,16 @@ class ScreenAdmUserNotas extends Component {
                                         <td>{itLivro.autor}</td>
                                         <td>
                                             {
+                                                // api.get('projects/notamedia/' + itLivro._id)
+                                                //     .then(Response => {
+                                                //         console.log(Response)
+                                                //         return (Response)
+                                                //     })
+                                                // () => {
+                                                //     api.get('projects/notamedia' + itLivro._id)
+                                                //         .then(Response => { console.log(Response) })
+
+                                                // }
 
                                                 // this.state.resultTudo.map((item) => {
                                                 //     return (item);

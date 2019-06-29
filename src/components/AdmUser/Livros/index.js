@@ -40,19 +40,10 @@ class ComponetAdmUserLivros extends Component {
 
 
     deletaLivro = (id) => {
-        const requestInfo = {
-            method: 'delete',
-            headers: new Headers({
-                'Content-Type': 'application/json',
-                Authorization: `Bearer ${localStorage.getItem('token')}`
-            }),
-        };
-        console.log(requestInfo);
 
-        api.delete('livros/' + id)
-            .then(response => { return response })
-            .then(result => {
-                this.setState({ errorMessage: result.Error });
+        api.delete('projects/livros/' + id)
+            .then(res => {
+                this.setState({ errorMessage: res.data.Error });
                 this.fetchData();
             })
             .catch(e => {
