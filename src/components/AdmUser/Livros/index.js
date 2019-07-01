@@ -7,11 +7,13 @@ class ComponetAdmUserLivros extends Component {
         super(props);
 
         this.state = {
+            id: '',
             titulo: '',
             autor: '',
             editora: '',
             errorMessage: '',
-            result: []
+            result: [],
+            update: false
         }
 
 
@@ -55,18 +57,50 @@ class ComponetAdmUserLivros extends Component {
 
 
     createLivro = () => {
-        const data = { titulo: this.titulo, autor: this.autor, editora: this.editora };
-        api.post('projects/livros', data)
-            .then(result => {
-                this.setState({ errorMessage: result.Error });
-                this.fetchData();
-            })
-            .catch(e => {
-                this.setState({ errorMessage: e.message })
-            });
+        if (this.state.update) {
+
+            const data = { titulo: this.titulo, autor: this.autor, editora: this.editora };
+            api.put('projects/livros/' + this.state.id, data)
+                .then(result => {
+                    this.setState({ errorMessage: result.Error });
+                    this.fetchData();
+                })
+                .catch(e => {
+                    this.setState({ errorMessage: e.message })
+                });
+
+
+            this.setState({ update: false });
+        }
+        else {
+            const data = { titulo: this.titulo, autor: this.autor, editora: this.editora };
+            api.post('projects/livros', data)
+                .then(result => {
+                    this.setState({ errorMessage: result.Error });
+                    this.fetchData();
+                })
+                .catch(e => {
+                    this.setState({ errorMessage: e.message })
+                });
+
+        }
         this.limpaCampos();
     };
 
+    editaLivro = (id, titulo, autor, editora) => {
+        this.setState({
+            id: id
+        });
+        this.titulo = titulo;
+        this.autor = autor;
+        this.editora = editora;
+        document.getElementById('titulo').value = titulo;
+        document.getElementById('autor').value = autor;
+        document.getElementById('editora').value = editora;
+        this.setState({ update: true });
+
+
+    }
 
     handleSubmit(e) {
         e.preventDefault();
@@ -110,7 +144,7 @@ class ComponetAdmUserLivros extends Component {
                             <input type="text" onChange={e => this.editora = e.target.value} className="form-control mb-2" id="editora" placeholder="Editora do Livro" />
                         </div>
                         <div className="col-auto">
-                            <button type="submit" className="btn btn-primary mb-2" onClick={this.createLivro}>Salvar</button>
+                            <button type="submit" className="btn btn-primary mb-2" onClick={this.createLivro} id="botaoSalvar">Salvar</button>
                         </div>
                     </div>
                     <table class="table table-hover">
@@ -133,6 +167,9 @@ class ComponetAdmUserLivros extends Component {
                                             <td>
                                                 <button type="submit" className="btn btn-danger" onClick={() => this.deletaLivro(item._id)}>
                                                     Delete
+                                                </button>
+                                                <button type="submit" className="btn btn-success ml-2" onClick={() => this.editaLivro(item._id, item.titulo, item.autor, item.editora)}>
+                                                    Editar
                                                 </button>
                                             </td>
                                         </tr>

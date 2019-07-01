@@ -55,38 +55,15 @@ class ScreenAdmUserNotas extends Component {
                                     <tr>
                                         <td>{itLivro.titulo}</td>
                                         <td>{itLivro.autor}</td>
-                                        <td>
-                                            {
-                                                // api.get('projects/notamedia/' + itLivro._id)
-                                                //     .then(Response => {
-                                                //         console.log(Response)
-                                                //         return (Response)
-                                                //     })
-                                                // () => {
-                                                //     api.get('projects/notamedia' + itLivro._id)
-                                                //         .then(Response => { console.log(Response) })
-
-                                                // }
-
-                                                // this.state.resultTudo.map((item) => {
-                                                //     return (item);
-                                                //     // return (
-                                                //     //     item.notas.filter(g => g.livro === itLivro._id).sum(x => x.nota)
-                                                //     // );
-
-                                                // })
-
-                                                // this.state.resultNotas.sum(x => {
-                                                //     return{}
-                                                // })
-
-
-
-                                                // this.state.resultNotas.map((itNota, i) => {
-                                                //     return (i++)
-                                                // })
-
-                                            }
+                                        <td>{
+                                            this.state.resultNotas.filter(x => x.livro === itLivro._id)
+                                                .map(u => {
+                                                    return u.nota
+                                                })
+                                                .reduce((a, b) => {
+                                                    return a + b
+                                                }) / this.state.resultNotas.filter(x => x.livro === itLivro._id).length
+                                        }
                                         </td>
                                     </tr>
 
