@@ -1,68 +1,22 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Aktie Now
+## Teste de Desenvolvedor (FrontEnd)
 
-## Available Scripts
-
-In the project directory, you can run:
-
-### `npm start`
-
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+Imagine que uma biblioteca precisa de um sistema onde os usuários que alugaram livros possam registrar sua opinião sobre os mesmos utilizando o browser de um computador que ficará disponível na saída da biblioteca. 
+ 
+Você deve desenvolver: 1 - Uma tela onde administradores podem fazer cadastro, edição e remoção dos livros no sistema (CRUD completo). 2 - Uma tela de avaliação para que os usuários finais selecionem um dos livros cadastrados e deem uma nota para ele. 3 - Uma tela para que os administradores vejam a nota média de cada livro. 
+ 
+------------------------------------------------------------------------------------------------------------ 
+ 
+Sobre o desenvolvimento: 
+ 
+- O Frontend deve ser implementado utilizando Angular ou React. - O Backend deve ser implementado em NodeJS, utlizando o framework Express. - A API de serviços deve ser Restful - Os dados podem ser armazenados em um database de sua escolha. 
+ 
+Ademais, você é livre para desenvolver o aplicativo como bem entender e criar sua própria solução, demonstrando quais são os seus conhecimentos sobre desenvolvimento web. 
+ 
+O que é avaliado 
+ 
+- Qualidade, estrutura e organização do código - Boas práticas de desenvolvimento - A UX das telas - A escolha de ferramentas e estruturas para auxiliar o desenvolvimento  
+ 
+O que deve ser entregue 
+ 
+- O link do repositório no bitbucket - O link da aplicação rodando para testarmos (você deverá hospedar a aplicação em um servidor gratuito) - Um texto explicando o que foi feito e o que poderia ser desenvolvido em versões seguintes para o projeto se tornar ainda melhor 
