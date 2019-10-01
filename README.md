@@ -1,4 +1,7 @@
 # Aktie Now
+
+[![Greenkeeper badge](https://badges.greenkeeper.io/marcelochb/bibliotecaFrontEnd.svg)](https://greenkeeper.io/)
+
 ## Teste de Desenvolvedor (FrontEnd)
 
 Imagine que uma biblioteca precisa de um sistema onde os usuários que alugaram livros possam registrar sua opinião sobre os mesmos utilizando o browser de um computador que ficará disponível na saída da biblioteca. 
